@@ -1,10 +1,14 @@
 export OMP_NUM_THREADS=8
 model_name_or_path="klue/bert-base"
-python /elder_speech_emotion_classfication/train.py \
+NUM_TRAIN_EPOCHS=10
+LOG_DIR=log
+mkdir -p "$LOG_DIR"
+
+python -m train \
   --output_dir "output/${model_name_or_path}" \
   --train_csv_path "data/preprocess/train.tsv" \
   --test_csv_path "data/preprocess/test.tsv" \
-  --num_train_epochs "1" \
+  --num_train_epochs "${NUM_TRAIN_EPOCHS}" \
   --per_device_train_batch_size "32" \
   --per_device_eval_batch_size "32" \
   --gradient_accumulation_steps "1"\
@@ -23,4 +27,5 @@ python /elder_speech_emotion_classfication/train.py \
   --label_names "labels" \
   --load_best_model_at_end \
   --do_eval \
-  --no_cuda 
+  --no_cuda \
+  > $LOG_DIR/train.log 2>&1

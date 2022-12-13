@@ -12,7 +12,8 @@ def main(args):
     data_path = args.raw_data_path
 
     raw_data = pd.read_csv(data_path, sep="\t")
-    raw_data = pd.concat([raw_data] * 200).reset_index(drop=True)
+    # 테스트 용도로 데이터 뻥튀기기
+    # raw_data = pd.concat([raw_data] * 200).reset_index(drop=True)
 
     train_df, test_df = train_test_split(
         raw_data, test_size=args.test_ratio, random_state=args.seed, shuffle=True, stratify=raw_data[RAW_LABELS]

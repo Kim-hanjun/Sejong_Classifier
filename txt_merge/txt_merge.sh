@@ -1,6 +1,7 @@
 input_dir='/data/sejong_data/output'
-output_dir='/data/ncloud/repo/jun/elder_speech_emotion_classification/data/raw'
+output_dir='/home/ncloud/workspace/repo/Sejong_Classifier/data/raw'
+mkdir -p "$output_dir"
 
-python txt_merge.py 
+python -m txt_merge.txt_merge \
     --input_dir "$input_dir" \
     --output_dir "$output_dir"
