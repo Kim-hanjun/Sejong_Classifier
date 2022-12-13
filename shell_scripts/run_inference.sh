@@ -1,6 +1,6 @@
-model_path="/output/klue/bert-base"
-test_tsv_path="/data/preprocess/test.tsv"
+MODEL_PATH="output/klue/bert-base"
+TEST_TSV_PATH="data/preprocess/test.tsv"
 
 python -m inference \
-  --model_path ${model_path} \
-  --test_tsv_path ${test_tsv_path}
+  --model_path ${MODEL_PATH} \
+  --test_tsv_path ${TEST_TSV_PATH}

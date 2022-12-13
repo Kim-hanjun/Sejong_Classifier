@@ -1,7 +1,7 @@
 export OMP_NUM_THREADS=8
 model_name_or_path="klue/bert-base"
 NUM_TRAIN_EPOCHS=10
-LOG_DIR=log
+LOG_DIR="/home/ncloud/workspace/repo/Sejong_Classifier/log"
 mkdir -p "$LOG_DIR"
 
 python -m train \
