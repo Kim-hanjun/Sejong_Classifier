@@ -1,5 +1,6 @@
 from enum import Enum
-import os, re
+import os
+import re
 import argparse
 import csv
 
@@ -22,12 +23,12 @@ TRAIN_DATA_FIELD_LIST = [TrainDataInputLabel.TEXT.value, TrainDataInputLabel.LAB
 
 
 def _tsv_write(
-    output_dir: str,
-    content: Iterable = None,
-    mode: str = "w",
-    encoding: str = "utf-8",
-    newline: str = "",
-    delimiter: str = "\t",
+        output_dir: str,
+        content: Iterable = None,
+        mode: str = "w",
+        encoding: str = "utf-8",
+        newline: str = "",
+        delimiter: str = "\t",
 ):
     """tsv(또는 csv) 파일 쓰기
 
@@ -66,13 +67,12 @@ def _find_target_label(dirpath: str, label_tuple_list: list) -> str:
 
 
 def merge_file(input_dir: str, args):
-
     training_data_list = list()
     for dirpath, dirnames, filenames in os.walk(input_dir):
         # print(f"dirpath: {dirpath}, dirnames: {dirnames}, filenames: {filenames}")
         # input_dir에 있는 폴더명을 레이블명으로 사용
         if dirpath == input_dir:
-            label_tuple_list = [(os.path.join(input_dir, dirname), dirname)  for dirname in dirnames]
+            label_tuple_list = [(os.path.join(input_dir, dirname), dirname) for dirname in dirnames]
 
         for base_filename in filenames:
             full_filename = os.path.join(dirpath, base_filename)
@@ -86,7 +86,10 @@ def merge_file(input_dir: str, args):
                     text_file = f.read()
                     text_file = text_file.replace("\n", " ")
                 target_label = _find_target_label(dirpath, label_tuple_list)
-                training_data_list.append([text_file[0:100], target_label])
+                if target_label is None:
+                    raise Exception(
+                        f'Something wrong between label_tuple_list: {label_tuple_list} and dirpath: {dirpath}')
+                training_data_list.append([text_file[0:MAX_EXTRACTION_TEXT_LEN], target_label])
 
     _tsv_write(args.output_dir, training_data_list)
 

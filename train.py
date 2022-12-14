@@ -35,7 +35,7 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 
 def main(model_args: ModelArguments, dataset_args: DatasetsArguments, training_args: MyTrainingArguments):
-    setproctitle("elder_speach_cls")
+    setproctitle("sejong_classifier")
     seed_everything(training_args.seed)
 
     config = AutoConfig.from_pretrained(model_args.model_name_or_path, num_labels=len(LABEL2ID))

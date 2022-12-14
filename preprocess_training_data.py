@@ -1,5 +1,7 @@
 from enum import Enum
-import os, subprocess
+import os
+import subprocess
+from pathlib import Path
 import argparse
 import csv
 
@@ -66,8 +68,7 @@ def _get_synap_doc_filter_result(cmd: str, file_path: str, save_path: str) -> st
         retcode: return code from command.
     """
     save_dir = os.path.dirname(save_path)
-    if not os.path.exists(save_dir):
-        os.mkdir(save_dir)
+    Path(save_dir).mkdir(parents=True, exist_ok=True)
     print(f'cmd: {cmd}, file_path: {file_path}, save_path: {save_path}, save_dir: {save_dir}')
     return subprocess.call([
         cmd,

@@ -27,5 +27,4 @@ python -m train \
   --label_names "labels" \
   --load_best_model_at_end \
   --do_eval \
-  --no_cuda \
   > $LOG_DIR/train.log 2>&1
