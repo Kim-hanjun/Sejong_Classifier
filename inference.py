@@ -32,7 +32,7 @@ def main(args) :
     # 원래 label 과 score 였던 열 이름을 예측, 스코어로 변경
     result_dataframe = pd.DataFrame(result).rename(columns={"label": "예측", "score": "스코어"})
     # 변경된 dataframe 을 열 방향으로 합친다
-    total_dataframe = pd.concat([sent_dataframe,result_dataframe], axis=1)
+    total_dataframe = pd.concat([sent_dataframe, result_dataframe, df_answers], axis=1)
     total_dataframe.to_excel("법무법인 세종 테스트 결과.xlsx", index=False, encoding='cp949')
 
 if __name__=="__main__" :
