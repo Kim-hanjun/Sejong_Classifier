@@ -1,5 +1,5 @@
 from transformers import pipeline, AutoTokenizer
-from literal import RAW_DATA
+from literal import RAW_DATA, RAW_LABELS
 import pandas as pd
 from tqdm import tqdm
 import argparse
