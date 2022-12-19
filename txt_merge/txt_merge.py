@@ -17,9 +17,9 @@ class TrainDataInputLabel(Enum):
     # name:내부변수,  value:레이블
     TEXT = "Data"
     LABEL = "정답"
+    ORIGIN_TXT = "원본파일명"
 
-
-TRAIN_DATA_FIELD_LIST = [TrainDataInputLabel.TEXT.value, TrainDataInputLabel.LABEL.value]
+TRAIN_DATA_FIELD_LIST = [TrainDataInputLabel.TEXT.value, TrainDataInputLabel.LABEL.value, TrainDataInputLabel.ORIGIN_TXT.value]
 
 
 def _tsv_write(
@@ -89,7 +89,7 @@ def merge_file(input_dir: str, args):
                 if target_label is None:
                     raise Exception(
                         f'Something wrong between label_tuple_list: {label_tuple_list} and dirpath: {dirpath}')
-                training_data_list.append([text_file[0:MAX_EXTRACTION_TEXT_LEN], target_label])
+                training_data_list.append([text_file[0:MAX_EXTRACTION_TEXT_LEN], target_label, base_filename])
 
     _tsv_write(args.output_dir, training_data_list)
 
