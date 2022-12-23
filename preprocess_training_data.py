@@ -113,7 +113,7 @@ def preprocess_training_data(abs_base_data_source_dir: str, args):
             full_filename = os.path.join(dirpath, base_filename)
             full_filename_root, full_filename_ext_with_dot = os.path.splitext(full_filename)
             # print(f'full_filename_root: {full_filename_root}, full_filename_ext_with_dot: {full_filename_ext_with_dot}')
-            if full_filename_ext_with_dot[1:] in TARGET_DOC_EXTS:
+            if full_filename_ext_with_dot[1:].lower() in TARGET_DOC_EXTS:
                 # 추출할 문서(동일 이름으로 텍스트 파일 중복 생성을 방지하기 위해 원본 파일의 확장자를 타겟 파일명의 일부로 사용)
                 target_file_root = full_filename_root.replace(abs_base_data_source_dir, abs_base_target_dir,
                                                               1) + full_filename_ext_with_dot.replace('.', '_', 1)
