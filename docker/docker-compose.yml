@@ -1,0 +1,24 @@
+version: "3"
+services:
+  gwanghwasidae_classifier:
+    container_name: gwanghwasidae_classifier
+    image: gwanghwasidae_classifier:0.4
+    restart: unless-stopped
+    environment:
+      - LC_ALL=C.UTF-8
+      - LANG=C.UTF-8
+      - TZ=Asia/Seoul
+# multi-line strings in YAML.
+# https://stackoverflow.com/questions/3790454/how-do-i-break-a-string-in-yaml-over-multiple-lines
+    entrypoint: >
+      python3.7 -m entrypoint.run_classifier --local_worker_devices -1
+      --clue4_alt_score_threshold 0.4 --emotion7_score_weights "1,1,1,1,1,1,1"
+      --kamino_logger debug --reinit_worker_on_exception_while_predict True
+    ports:
+      - "5200:5000"
+    volumes:
+      - /data01/READ_ONLY_DATA/Gwanghwasidae_Classifier/models:/app/models
+    networks:
+      - ghsdnet
+networks:
+  ghsdnet:

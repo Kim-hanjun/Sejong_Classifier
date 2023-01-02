@@ -1,0 +1,21 @@
+# logrotate config file for docker containers
+# copy this file to /etc/logrotate.d and run the following command.
+# logrotate -fv /etc/logrotate.d/docker-container
+#   -d: dry-run 옵션으로서 file을 실제 지우지는 않고 작동 과정만 출력하는 옵션
+#   -f, --force : Tells logrotate to force the rotation, even if it doesn't think  this is necessary.
+/var/lib/docker/containers/*/*.log {
+       daily
+       rotate 7
+       compress
+       maxsize 10M
+       missingok
+       delaycompress
+       copytruncate
+}
+
+# [추가 확인사항]
+// logrotate 이후에도 프로세스가 삭제된 파일을 물고 있는 문제
+lsof +L1        // select  open  files  that  have  been unlinked.
+-> docker 데몬을 리로드해서 삭제된 물고 있는 파일을 정리 (루트 계정으로 crontab -e)
+# Release all the deleted files by /etc/logrotate.d/docker-container (도커 컨테이너를 모두 재시작하니 주의 필요)
+19 1 * * sun /bin/systemctl restart docker
