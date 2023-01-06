@@ -25,8 +25,8 @@ def main(args):
     logging.info(f"test info\nlen:{len(test_df)}\n{test_info}")
     logging.info(f"LABEL2ID\n{LABEL2ID}")
 
-    train_df: pd.DataFrame = train_df[[RAW_DATA, RAW_LABELS]].reset_index(drop=True)
-    test_df: pd.DataFrame = test_df[[RAW_DATA, RAW_LABELS]].reset_index(drop=True)
+    train_df: pd.DataFrame = train_df.reset_index(drop=True)
+    test_df: pd.DataFrame = test_df.reset_index(drop=True)
 
     if not os.path.exists(PREPROCESS_FOLDER):
         os.mkdir(PREPROCESS_FOLDER)
