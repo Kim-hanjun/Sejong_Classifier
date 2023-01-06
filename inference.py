@@ -14,6 +14,7 @@ def main(args) :
     # 불러온 데이터중 Data 부분만 가져와서 리스트로 변경
     df_Datas = df[RAW_DATA].values.tolist()
     df_answers = df[RAW_LABELS]
+    df_origin = df["원본파일명"]
 
     # 텍스트 길이가 max를 넘어서서 토크나이저 설정 변경
     sent  = df_Datas
@@ -32,7 +33,7 @@ def main(args) :
     # 원래 label 과 score 였던 열 이름을 예측, 스코어로 변경
     result_dataframe = pd.DataFrame(result).rename(columns={"label": "예측", "score": "스코어"})
     # 변경된 dataframe 을 열 방향으로 합친다
-    total_dataframe = pd.concat([sent_dataframe, result_dataframe, df_answers], axis=1)
+    total_dataframe = pd.concat([sent_dataframe, result_dataframe, df_answers, df_origin], axis=1)
     total_dataframe.to_excel("법무법인 세종 테스트 결과.xlsx", index=False, encoding='cp949')
 
 if __name__=="__main__" :
