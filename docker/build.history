@@ -3,7 +3,4 @@
 # The bottom line means the latest history.
 
 # Docker image & version            Comment
-gwanghwasidae_classifier:0.1        Initial
-gwanghwasidae_classifier:0.2        4단 및 7정 모델링 완료
-gwanghwasidae_classifier:0.3        4단, 7정 2차 학습_국문
-gwanghwasidae_classifier:0.4        학습데이터의 불완전, 편향을 고려 스코어 가중치 적용
+sejong_classifier:0.1               Initial
