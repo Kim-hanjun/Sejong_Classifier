@@ -1,11 +1,11 @@
 # syntax = docker/dockerfile:experimental
-ARG CUDA_VERSION=11.1
+ARG CUDA_VERSION=11.1.1
 
 FROM nvidia/cuda:${CUDA_VERSION}-devel-ubuntu18.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ARG PYTHON_VER=python3.7
+ARG PYTHON_VER=python3.8
 RUN echo $PYTHON_VER
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends apt-utils && \
@@ -24,7 +24,7 @@ RUN rm -f /usr/bin/python3                                  && \
     ln -s /usr/bin/$PYTHON_VER /usr/bin/python3
 
 # System packages
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl git
 
 # git
 RUN apt-get update && \
@@ -43,18 +43,17 @@ COPY . /app
 #RUN rm key.json
 
 ## Install Mecab
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends tzdata g++ git curl
-RUN apt-get install python3-setuptools
-RUN apt-get install -y default-jdk default-jre
+# RUN apt-get update && \
+#     apt-get install -y --no-install-recommends tzdata g++ git curl
+# RUN apt-get install python3-setuptools
+# RUN apt-get install -y default-jdk default-jre
 
 # Install kamino, transformers-addons
-RUN --mount=type=secret,id=github_secret pip install git+https://$(cat /run/secrets/github_secret)@github.com/42maru-ai/Kamino.git@v0.2.1 \
-    git+https://$(cat /run/secrets/github_secret)@github.com/42maru-ai/42maru-transformers-addons.git@v4.2.1
+RUN --mount=type=secret,id=github_secret pip install git+https://$(cat /run/secrets/github_secret)@github.com/42maru-ai/Kamino.git@v0.2.2
 RUN rm github_secret.txt
 
 # python requirements
 RUN pip install -r requirements.txt
 
 ## Install Mecab
-RUN curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh | bash -s
+# RUN curl -s https://raw.githubusercontent.com/konlpy/konlpy/master/scripts/mecab.sh | bash -s
