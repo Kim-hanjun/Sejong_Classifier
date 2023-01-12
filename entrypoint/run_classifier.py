@@ -11,9 +11,9 @@ from torch.nn import Softmax
 # klue/bert-base 모델의 MSL : 512
 MODEL_MSL = 512
 # 모델의 경로
-_MODEL_DIR_PREFIX = "/app/output/klue/bert-base"
+_MODEL_DIR_PREFIX = "/app/output/model"
 # label_classes 경로
-_LABEL_CLASS = "/app/custom/sejong_datasets/label_classes/classes.txt"
+_LABEL_CLASS = "/app/label_classes/classes.txt"
 
 # label_classes, 모델 등 정보 로딩
 index2class = []

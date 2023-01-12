@@ -1,7 +1,7 @@
 #!/bin/bash
 # Run this script at the root directory!
 #   cd {REPOSOTORY_HOME}
-#   ./docker/docker_build.sh
+#   ./docker/build.sh
 
 DOCKER_IMG_VER=`tail -n 1 ./docker/build.history | awk -F' ' '{print $1}'`
 

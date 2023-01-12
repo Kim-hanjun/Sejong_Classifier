@@ -16,8 +16,9 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - /home/jun/workspace/Sejong_Classifier/output/klue/bert-base:/app/output/klue/bert-base
+      - /home/jun/workspace/Sejong_Classifier/output/klue/bert-base:/app/output/model
+      - /home/jun/workspace/Sejong_Classifier/label_classes:/app/label_classes
     networks:
-      - ghsdnet
+      - sejongnet
 networks:
-  ghsdnet:
+  sejongnet:

@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:experimental
 ARG CUDA_VERSION=11.1.1
 
-FROM nvidia/cuda:${CUDA_VERSION}-devel-ubuntu18.04
+FROM nvidia/cuda:${CUDA_VERSION}-devel-ubuntu20.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
